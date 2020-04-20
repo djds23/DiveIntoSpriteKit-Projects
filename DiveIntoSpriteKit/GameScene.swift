@@ -31,7 +31,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player.position.x = -400
         player.zPosition = 1
         addChild(player)
-        player.physicsBody? = SKPhysicsBody(texture: player.texture!, size: player.size)
+        player.physicsBody = SKPhysicsBody(texture: player.texture!, size: player.size)
         player.physicsBody?.categoryBitMask = 1
 
         gameTimer = Timer.scheduledTimer(timeInterval: 0.35, target: self, selector: #selector(createEnemy), userInfo: nil, repeats: true)
