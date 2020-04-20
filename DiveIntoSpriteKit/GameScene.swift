@@ -9,7 +9,7 @@
 import SpriteKit
 
 @objcMembers
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate {
     let player = SKSpriteNode(imageNamed: "player-submarine.png")
 
     var touchingPlayer = false
@@ -79,10 +79,7 @@ class GameScene: SKScene {
         sprite.physicsBody?.contactTestBitMask = playerPhysicsBitmask
         sprite.physicsBody?.categoryBitMask = 0
     }
-}
 
-extension GameScene: SKPhysicsContactDelegate {
-    
     func didBegin(_ contact: SKPhysicsContact) {
         guard
             let nodeA = contact.bodyA.node,
