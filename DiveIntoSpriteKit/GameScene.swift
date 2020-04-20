@@ -15,10 +15,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var touchingPlayer = false
 
     var gameTimer: Timer?
-    let playerPhysicsBitmask: UInt32 = 1
 
     override func didMove(to view: SKView) {
-        physicsWorld.contactDelegate = self
 
         let background = SKSpriteNode(imageNamed: "water.jpg")
         background.zPosition = -1
@@ -34,14 +32,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player.zPosition = 1
         addChild(player)
         player.physicsBody? = SKPhysicsBody(texture: player.texture!, size: player.size)
-        player.physicsBody?.categoryBitMask = playerPhysicsBitmask
-        gameTimer = Timer.scheduledTimer(
-            timeInterval: 0.35,
-            target: self,
-            selector: #selector(createEnemy),
-            userInfo: nil,
-            repeats: true
-        )
+        player.physicsBody?.categoryBitMask = 1
+
+        gameTimer = Timer.scheduledTimer(timeInterval: 0.35, target: self, selector: #selector(createEnemy), userInfo: nil, repeats: true)
+        physicsWorld.contactDelegate = self
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -76,7 +70,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         sprite.physicsBody = SKPhysicsBody(texture: sprite.texture!, size: sprite.size)
         sprite.physicsBody?.velocity = CGVector(dx: -500, dy: 0)
         sprite.physicsBody?.linearDamping = 0
-        sprite.physicsBody?.contactTestBitMask = playerPhysicsBitmask
+        sprite.physicsBody?.contactTestBitMask = 1
         sprite.physicsBody?.categoryBitMask = 0
     }
 
